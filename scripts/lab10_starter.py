@@ -223,7 +223,7 @@ class RrtPlanner:
         ######### Your code starts here #########
         goal_reached_node = None
  
-        for _ in range(self.max_iterations):
+        for i in range(self.max_iterations):
             q_rand = self._randomly_sample_q()
             q_new = self._extend(graph, q_rand)
  
@@ -246,6 +246,7 @@ class RrtPlanner:
                 plan.append(node.to_dict())
  
             plan[-1] = {"x": goal["x"], "y": goal["y"]}
+            rospy.logwarn(f"RRT found the goal in {i} iterations.")
         else:
             rospy.logwarn(f"RRT did not reach the goal within {self.max_iterations} iterations.")
 
